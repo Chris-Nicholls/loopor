@@ -231,7 +231,7 @@ public:
                     return;
                 if (doubleClick)
                 {
-                    reset();
+                    undo();
                     return;
                 }
 
@@ -256,7 +256,7 @@ public:
                 if (m_state == LOOPER_STATE_RECORDING || m_state == LOOPER_STATE_WAITING_FOR_THRESHOLD)
                     finishRecording();
                 else
-                    undo();
+                    stop();
             });
         }
         else if (port == LOOPER_UNDO)
@@ -481,10 +481,16 @@ private:
     {
         m_nrOfDubs = 0;
         m_maxUsedDubs = 0;
-        m_nrOfUsedSamples = 0;
         m_state = LOOPER_STATE_INACTIVE;
         m_currentLoopIndex = 0;
         m_loopLength = 0;
+        m_nrOfUsedSamples = 0;
+    }
+
+    /// Stop playiing, but keep all the loops available
+    void stop()
+    {
+        m_state = LOOPER_STATE_INACTIVE;
         m_nrOfUsedSamples = 0;
     }
 
