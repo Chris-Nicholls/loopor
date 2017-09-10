@@ -491,7 +491,7 @@ private:
     void stop()
     {
         m_state = LOOPER_STATE_INACTIVE;
-        m_nrOfUsedSamples = 0;
+        m_currentLoopIndex = 0;
     }
 
     /// Start recording a dub if possible (a dub and memory for audio left).
